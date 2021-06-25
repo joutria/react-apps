@@ -1,0 +1,116 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  transition: 0.5s;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+h2 {
+  margin: 1em;
+}
+
+html,
+body {
+  min-height: 100%;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background: #000;
+  color: #fff;
+}
+
+button {
+  margin: 2em;
+  background: rgba(0, 255, 234, 0);
+  color: rgba(0, 255, 234, 0.5);
+  border: 0.2em solid rgba(0, 255, 234, 1);
+  border-radius: 1em;
+  padding: 1.2em;
+}
+
+button:hover {
+  box-shadow: 0.3em 0.3em 0em rgba(0, 255, 234, 1);
+}
+
+.App {
+  width: 100%;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+/* Popup style */
+.popup-box {
+  position: fixed;
+  background: #00000050;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.box {
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
+  height: auto;
+  max-height: 70vh;
+  margin-top: calc(100vh - 85vh - 20px);
+  background: black;
+  border-radius: 4px;
+  padding: 20px;
+  border: 0.1em solid #999;
+  overflow: auto;
+}
+
+.close-icon {
+  content: "x";
+  cursor: pointer;
+  position: fixed;
+  right: calc(15% - 30px);
+  top: calc(100vh - 85vh - 33px);
+  background: #000000;
+  width: 1.3em;
+  height: 1.3em;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
+  border: 0.1em solid #999;
+  font-size: 20px;
+}
+
+.SpinControl{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.spin {
+  min-width: 2em;
+  min-height: 2em;
+  margin: 1em;
+  padding: 0em 0.1em 0.25em 0.1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.1em solid white;
+  border-radius: 2em;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.spacing{
+  margin: 0.5em 0em;
+}

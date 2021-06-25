@@ -1,0 +1,55 @@
+import { useState } from "react";
+import Popup from "./Popup";
+
+function Angles() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [degrees, setDegrees] = useState(0);
+  const [rads, setRads] = useState(0);
+  const [convert, setConvert]= useState('...');
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className="Angles">
+      <button onClick={togglePopup}>Angles</button>
+      {isOpen && (
+        <Popup
+          content={
+            <>
+              <h2>Angles</h2>
+              <p>Converting {convert}</p>
+              <div className='spacing'>
+                <label>Degrees: </label>
+                <input
+                  type="text"
+                  value={degrees}
+                  onChange={(e) => {
+                    setDegrees(e.target.value);
+                    setRads(e.target.value/180);
+                    setConvert('to Radians...');
+                  }}
+                />
+              </div>
+              <div className='spacing'>
+                <label>Radians: </label>
+                <input
+                  type="text"
+                  value={rads}
+                  onChange={(e) => {
+                    setRads(e.target.value);
+                    setDegrees(e.target.value*180);
+                    setConvert('to Degrees...');
+                  }}
+                />
+              </div>
+            </>
+          }
+          handleClose={togglePopup}
+        />
+      )}
+    </div>
+  );
+}
+
+export default Angles;
