@@ -4,54 +4,57 @@ function SpinControl() {
   const [spinner, setSpinner] = useState(0);
   const [press, setPress] = useState(0);
 
-  const handleDownStart = (e, param) => {
+  const handleDownStart = ( param) => {
     setPress(
       setTimeout(() => {
-        pressing(e, param);
-        handleDownStart(e, param);
+        pressing( param);
+        handleDownStart( param);
       }, 50)
     );
   };
 
-  const pressing = (e, param) => {
-    if (param == "-") {
+  const pressing = ( param) => {
+    if (param === "-") {
       setSpinner((prev) => prev - 1);
       console.log("pressing -", spinner);
-    } else if (param == "+") {
+    } else if (param === "+") {
       setSpinner((prev) => prev + 1);
       console.log("pressing +", spinner);
     }
   };
 
-  const handleDownEnd = (e) => {
+  const handleDownEnd = () => {
     clearTimeout(press);
-    console.log("End", e);
+    console.log("End");
   };
 
   return (
     <div className="SpinControl">
       <h2>Spinner</h2>
-      <div className="spin" style={{ transform: "rotate(" + spinner*(-1) + "deg)" }}>
+      <div
+        className="spin"
+        style={{ transform: "rotate(" + spinner * -1 + "deg)" }}
+      >
         &rarr;
       </div>
       <p>{spinner}</p>
       <div>
         <button
-          onMouseDown={(e) => {
-            handleDownStart(e, "-");
+          onMouseDown={() => {
+            handleDownStart( "-");
           }}
-          onMouseUp={(e) => {
-            handleDownEnd(e);
+          onMouseUp={() => {
+            handleDownEnd();
           }}
         >
           -1
         </button>
         <button
-          onMouseDown={(e) => {
-            handleDownStart(e, "+");
+          onMouseDown={() => {
+            handleDownStart( "+");
           }}
-          onMouseUp={(e) => {
-            handleDownEnd(e);
+          onMouseUp={() => {
+            handleDownEnd();
           }}
         >
           +1
