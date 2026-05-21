@@ -1,4 +1,5 @@
 {
+  "name": "react-apps",
   "version": 2,
   "builds": [
     {
