@@ -1,6 +1,8 @@
 {
   "name": "react-apps",
   "version": 2,
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm install",
   "builds": [
     {
       "src": "package.json",
