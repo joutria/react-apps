@@ -1,32 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 
 function SpinControl() {
   const [spinner, setSpinner] = useState(0);
-  const [press, setPress] = useState(0);
+  const timerRef = useRef(null);
 
-  const handleDownStart = ( param) => {
-    setPress(
-      setTimeout(() => {
-        pressing( param);
-        handleDownStart( param);
-      }, 50)
-    );
-  };
+  const pressing = useCallback((param) => {
+    setSpinner((prev) => {
+      if (param === "-") return prev - 1;
+      if (param === "+") return prev + 1;
+      return prev;
+    });
+  }, []);
 
-  const pressing = ( param) => {
-    if (param === "-") {
-      setSpinner((prev) => prev - 1);
-      console.log("pressing -", spinner);
-    } else if (param === "+") {
-      setSpinner((prev) => prev + 1);
-      console.log("pressing +", spinner);
+  const handleDownStart = useCallback((param) => {
+    pressing(param);
+    timerRef.current = setTimeout(() => {
+      handleDownStart(param);
+    }, 50);
+  }, [pressing]);
+
+  const handleDownEnd = useCallback(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
     }
-  };
+  }, []);
 
-  const handleDownEnd = () => {
-    clearTimeout(press);
-    console.log("End");
-  };
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="SpinControl">
@@ -40,22 +46,16 @@ function SpinControl() {
       <p>{spinner}</p>
       <div>
         <button
-          onMouseDown={() => {
-            handleDownStart( "-");
-          }}
-          onMouseUp={() => {
-            handleDownEnd();
-          }}
+          onMouseDown={() => handleDownStart("-")}
+          onMouseUp={handleDownEnd}
+          onMouseLeave={handleDownEnd}
         >
           -1
         </button>
         <button
-          onMouseDown={() => {
-            handleDownStart( "+");
-          }}
-          onMouseUp={() => {
-            handleDownEnd();
-          }}
+          onMouseDown={() => handleDownStart("+")}
+          onMouseUp={handleDownEnd}
+          onMouseLeave={handleDownEnd}
         >
           +1
         </button>
